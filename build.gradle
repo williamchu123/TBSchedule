@@ -1,0 +1,33 @@
+plugins{
+    id('java')
+    id('maven')
+    id("cn.bestwu.publish") version "0.0.14"
+}
+
+group = 'cn.bestwu'
+version = '3.2.18'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+tasks.withType(JavaCompile) {
+	options.encoding = 'GBK'
+}
+
+repositories {
+     jcenter()
+}
+dependencies {
+    compile("com.google.code.gson:gson:2.1")
+    compile("commons-beanutils:commons-beanutils-core:1.7.0")
+    compile("commons-lang:commons-lang:2.4")
+    compile("org.apache.zookeeper:zookeeper:3.4.6") {
+        exclude(module: "slf4j-log4j12")
+    }
+    compile("org.slf4j:slf4j-api:1.6.1")
+    compileOnly("javax.servlet:servlet-api:2.5")
+    compileOnly("org.springframework:spring:2.5.6.SEC03")
+    testCompile("ch.qos.logback:logback-classic:0.9.29")
+    testCompile("ch.qos.logback:logback-core:0.9.29")
+    testCompile("junit:junit:4.5")
+    testCompile("org.unitils:unitils:2.3")
+}

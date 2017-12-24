@@ -1,7 +1,11 @@
 package com.taobao.pamirs.schedule.taskmanager;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import com.taobao.pamirs.schedule.CronExpression;
+import com.taobao.pamirs.schedule.IScheduleTaskDeal;
+import com.taobao.pamirs.schedule.ScheduleUtil;
+import com.taobao.pamirs.schedule.TaskItemDefine;
+import com.taobao.pamirs.schedule.strategy.IStrategyTask;
+import com.taobao.pamirs.schedule.strategy.TBScheduleManagerFactory;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -9,16 +13,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.taobao.pamirs.schedule.CronExpression;
-import com.taobao.pamirs.schedule.IScheduleTaskDeal;
-import com.taobao.pamirs.schedule.ScheduleUtil;
-import com.taobao.pamirs.schedule.TaskItemDefine;
-import com.taobao.pamirs.schedule.strategy.IStrategyTask;
-import com.taobao.pamirs.schedule.strategy.TBScheduleManagerFactory;
 
 
 
@@ -81,7 +77,7 @@ abstract class TBScheduleManager implements IStrategyTask {
     protected List<TaskItemDefine> currentTaskItemList = new CopyOnWriteArrayList<TaskItemDefine>();
     /**
      * 最近一起重新装载调度任务的时间。
-     * 当前实际  - 上此装载时间  > intervalReloadTaskItemList，则向配置中心请求最新的任务分配情况
+     * 当前实际  - 上此装载时间   intervalReloadTaskItemList，则向配置中心请求最新的任务分配情况
      */
     protected long lastReloadTaskItemListTime=0;    
     protected boolean isNeedReloadTaskItem = true;
